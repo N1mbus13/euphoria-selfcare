@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container feature-container">
+    <div class="feature-header">
+      <h2>Event Planner</h2>
+      <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <form id="eventForm">
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" required>
+
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" required>
+
+      <button type="submit">Add Event</button>
+    </form>
+
+    <h3>Upcoming Events</h3>
+    <ul id="eventsList"></ul>
+  </div>
+
+  <script src="calendar.js"></script>
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

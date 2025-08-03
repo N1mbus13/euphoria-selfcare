@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Logging</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container feature-container">
+    <div class="feature-header">
+      <h2>Health Logging</h2>
+      <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <form id="healthForm">
+      <label for="sleepDuration">Sleep Duration (hrs):</label>
+      <input type="number" id="sleepDuration" required>
+
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" required>
+
+      <label for="mood">Mood (1–10): <span id="moodValue">5</span></label>
+      <input type="range" id="mood" min="1" max="10" value="5">
+
+      <button type="submit">Log Health</button>
+    </form>
+
+    <div id="logsContainer"></div>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    const healthForm = document.getElementById("healthForm");
+    const logsContainer = document.getElementById("logsContainer");
+
+    let healthLogs = JSON.parse(localStorage.getItem("healthLogs") || "[]");
+    displayLogs();
+
+    healthForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const sleepDuration = document.getElementById("sleepDuration").value;
+      const weight = document.getElementById("weight").value;
+      const mood = document.getElementById("mood").value;
+
+      const log = {
+        sleepDuration,
+        weight,
+        mood,
+        timestamp: new Date().toLocaleString()
+      };
+
+      healthLogs.push(log);
+      localStorage.setItem("healthLogs", JSON.stringify(healthLogs));
+      healthForm.reset();
+      document.getElementById("mood").value = 5;
+      document.getElementById("moodValue").textContent = "5";
+      displayLogs();
+    });
+
+    function displayLogs() {
+      logsContainer.innerHTML = "";
+      healthLogs.slice().reverse().forEach(log => {
+        const div = document.createElement("div");
+        div.className = "log-item";
+        div.innerHTML = `
+          <strong>${log.timestamp}</strong><br>
+          Sleep: ${log.sleepDuration} hrs<br>
+          Weight: ${log.weight} kg<br>
+          Mood: ${log.mood}/10
+        `;
+        logsContainer.appendChild(div);
+      });
+    }
+
+    document.getElementById("mood").addEventListener("input", function () {
+      document.getElementById("moodValue").textContent = this.value;
+    });
+  </script>
+</body>
+</html>

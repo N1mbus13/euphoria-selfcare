@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Euphoria - Main Menu</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="loader">Loading Euphoria...</div>
+
+  <div class="container feature-container">
+    <h2 style="text-align: center;">Welcome to Euphoria</h2>
+    <ul class="menu" style="text-align: center;">
+      <li><a href="meditation.html">Meditation</a></li>
+      <li><a href="calendar.html">Event Planner</a></li>
+      <li><a href="health.html">Health Logging</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+    </ul>
+  </div>
+
+  <script>
+    const loader = document.getElementById("loader");
+    const hasLoadedOnce = sessionStorage.getItem("loadedOnce");
+
+    if (!hasLoadedOnce) {
+      document.addEventListener("DOMContentLoaded", function () {
+        loader.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      });
+
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          loader.style.display = "none";
+          document.body.style.overflow = "auto";
+          sessionStorage.setItem("loadedOnce", "true");
+        }, 1000);
+      });
+    } else {
+      loader.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  </script>
+</body>
+</html>

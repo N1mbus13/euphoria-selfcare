@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Journal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container feature-container">
+    <div class="feature-header">
+      <h2>Journal</h2>
+      <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <form id="journalForm">
+      <label for="journalDate">Date:</label>
+      <input type="date" id="journalDate" required>
+
+      <label for="journalEntry">Entry:</label>
+      <textarea id="journalEntry" rows="6" placeholder="Write your journal entry..." required></textarea>
+
+      <button type="submit">Save</button>
+    </form>
+
+    <h3>Journal Entries</h3>
+    <div id="journalEntriesContainer"></div>
+  </div>
+
+  <script src="journal.js"></script>
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
